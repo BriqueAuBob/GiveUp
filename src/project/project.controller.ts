@@ -9,7 +9,7 @@ export class ProjectController {
   @Get()
   @Render('index')
   async getAll() {
-    const projects = await this.projectService.getAll()
+    const projects = await this.projectService.getRandoms()
     return { projects }
   }
 

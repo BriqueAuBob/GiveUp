@@ -29,4 +29,10 @@ export class ProjectService {
     const projects = await this.projectModel.find().exec();
     return projects
   }
+
+  async getRandoms(count: Number = 9) {
+    return await this.projectModel.aggregate([
+      { $sample: { size : count } }
+    ]).exec()
+  }
 }
