@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -24,7 +24,10 @@ export class ProjectService {
       const result = await newProject.save();
       return result
     } catch (err) {
-      console.log(err)
+      throw new HttpException({
+        status: HttpStatus.FORBIDDEN,
+        error: 'Tous les champs ne sont pas renseignés',
+      }, HttpStatus.FORBIDDEN);
     }
   }
 

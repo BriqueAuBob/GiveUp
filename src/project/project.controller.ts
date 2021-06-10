@@ -32,7 +32,7 @@ export class ProjectController {
     @UploadedFiles() uploads,
     @Body() params: Project
   ) {
-    const logo = uploads?.logo[0]?.filename ?? undefined
+    const logo = uploads?.logo?.[0]?.filename ?? undefined
     const contributors = uploads?.contributors?.map(contributor => contributor.filename)
     const data = {
       ...params,
@@ -44,8 +44,8 @@ export class ProjectController {
       if (project) {
         return { success: true }
       }
-    } catch {
-      // return error
+    } catch(err) {
+      return err.response.error
     }
   }
 }
