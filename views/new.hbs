@@ -10,7 +10,7 @@
 </head>
 <body class="bg-gray-900">
     <img class="fixed select-none top-0 -z-1" src="/img/waves.svg" alt=""/>
-    <form action="/project/create" method="POST">
+    <form action="/project/create" method="POST" enctype='multipart/form-data'>
         <div class="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12 px-4">
             <div class="mt-10 bg-gray-800 p-10 rounded-xl text-white shadow-2xl">
                 <h1 class="font-black text-xl text-center">Créer un nouveau projet abandonné</h1>
@@ -25,9 +25,10 @@
                     placeholder="Description du projet"
                 ></textarea>
                 <input
-                        class="block mt-4 w-full bg-gray-700 border-2 px-4 py-3 focus:outline-none border-gray-700 bg-opacity-20 rounded-md"
-                        name="totalHours"
-                        placeholder="Nombre d'heures passées sur le projet">
+                    type="number"
+                    class="block mt-4 w-full bg-gray-700 border-2 px-4 py-3 focus:outline-none border-gray-700 bg-opacity-20 rounded-md"
+                    name="totalHours"
+                    placeholder="Nombre d'heures passées sur le projet">
                 </input>
             </div>
             <div>
@@ -36,12 +37,13 @@
                     <div class="bg-gray-700 mt-4 border-gray-700 bg-opacity-20 rounded-md border-2 p-5">
                         <div class="font-bold text-xl text-center">Icone du projet</div>
                         <img width="74px" class="cursor-pointer mx-auto mt-4" src="/img/unknown.svg" />
+                        <input type="file" name="logo" id="logo" />
                     </div>
                     <div class="bg-gray-700 mt-4 border-gray-700 bg-opacity-20 rounded-md border-2 p-5">
                         <div class="font-bold text-xl text-center">Contributeurs</div>
                         <div class="flex flex-wrap">
                             <img width="44px" class="mt-5 mr-2 rounded-full" src="/img/unknown.svg" />
-                            <input type="file" id="contributors" hidden multiple />
+                            <input type="file" name="contributors" id="contributors" hidden multiple />
                             <label for="contributors" class="mt-5 cursor-pointer rounded-full w-11 border-dashed border-2 border-gray-50 flex justify-center items-center">+</label>
                         </div>
                     </div>

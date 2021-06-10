@@ -15,22 +15,20 @@ export class ProjectService {
   async create(project: {
     title: string,
     description: string,
-    author: string,
-    date: string,
     totalHours: number,
-    contributors: number
+    contributors: string[],
+    logo: string,
   }) {
     const newProject = new this.projectModel(project);
-    const result = await newProject.save();
-    return result
+    try {
+      const result = await newProject.save();
+      return result
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-  async getAll() {
-    const projects = await this.projectModel.find().exec();
-    return projects
-  }
-
-  async getRandoms(count: Number = 9) {
+  async getAll(count: number = 9) {
     return await this.projectModel.aggregate([
       { $sample: { size : count } }
     ]).exec()

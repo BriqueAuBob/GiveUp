@@ -1,6 +1,9 @@
-import { Controller, Get, Post, Render, Body } from '@nestjs/common';
+import { Controller, Get, Post, Render, Body, UseInterceptors, UploadedFiles, UploadedFile } from '@nestjs/common';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
+
 import { ProjectService } from './project.service';
 import { Project } from './project.model'
+import { options } from './../../helper/upload';
 
 @Controller('project')
 export class ProjectController {
@@ -9,14 +12,35 @@ export class ProjectController {
   @Get()
   @Render('index')
   async getAll() {
-    const projects = await this.projectService.getRandoms()
+    const projects = await this.projectService.getAll()
     return { projects }
   }
 
+  @Get('/new')
+  @Render('new')
+  new() {
+  }
+
   @Post('/create')
-  async create(@Body() params: Project) {
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'contributors' },
+      { name: 'logo', maxCount: 1 },
+    ], options)
+  )
+  async uploadFile(
+    @UploadedFiles() uploads,
+    @Body() params: Project
+  ) {
+    const logo = uploads?.logo[0]?.filename ?? undefined
+    const contributors = uploads?.contributors?.map(contributor => contributor.filename)
+    const data = {
+      ...params,
+      logo,
+      contributors
+    }
     try {
-      const project = await this.projectService.create(params)
+      const project = await this.projectService.create(data)
       if (project) {
         return { success: true }
       }

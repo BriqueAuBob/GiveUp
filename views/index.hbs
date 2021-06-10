@@ -25,8 +25,8 @@
                     <div class="bg-gradient-to-br from-blue-500 to-blue-700 p-8 rounded-md justify-between shadow-xl">
                     <div>
                         <div class="flex items-center font-bold text-white text-2xl">
-                            {{#if this.icon}}
-                                <img class="mr-6" src="{{ this.icon }}" />
+                            {{#if this.logo}}
+                                <img class="w-24 rounded-full mr-6" src="/uploads/{{ this.logo }}" />
                             {{/if}}
                             {{ this.title }}
                         </div>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="flex">
                             {{#each this.contributors}}
-                                <img class="w-8 transform translate-x-2 rounded-full ml-1" src="{{ this.url }}" />
+                                <img class="w-8 transform translate-x-2 rounded-full ml-1" src="/uploads/{{ this }}" />
                             {{/each}}
                         </div>
                     </div>

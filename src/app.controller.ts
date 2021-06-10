@@ -1,12 +1,8 @@
-import { Controller, Get, Render } from '@nestjs/common';
-import { ProjectService } from "./project/project.service";
+import { Controller, Get, Redirect } from '@nestjs/common';
 
 @Controller()
 export class AppController {
   @Get()
-  @Render('new')
-  getAll() {
-    // const projects = await ProjectService.getAll()
-    // return { projects }
-  }
+  @Redirect('project')
+  redirect(){}
 }
