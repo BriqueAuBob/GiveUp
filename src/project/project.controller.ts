@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Render, Body, UseInterceptors, UploadedFiles, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Render, Body, UseInterceptors, UploadedFiles, UploadedFile, ClassSerializerInterceptor } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 
 import { ProjectService } from './project.service';
 import { Project } from './project.model'
 import { options } from './../../helper/upload';
+
+const colors = ['blue', 'red', 'yellow', 'green']
 
 @Controller('project')
 export class ProjectController {
@@ -13,6 +15,9 @@ export class ProjectController {
   @Render('index')
   async getAll() {
     const projects = await this.projectService.getAll()
+    projects.map(project => {
+      project.color = colors[Math.floor(Math.random() * colors.length)]
+    })
     return { projects }
   }
 
