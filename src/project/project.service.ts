@@ -26,7 +26,7 @@ export class ProjectService {
     } catch (err) {
       throw new HttpException({
         status: HttpStatus.FORBIDDEN,
-        error: 'Tous les champs ne sont pas renseignés',
+        error: 'Tous les champs ne sont pas renseignés et/ou sont mal renseignés.',
       }, HttpStatus.FORBIDDEN);
     }
   }

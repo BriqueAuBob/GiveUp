@@ -7,5 +7,8 @@ export const options = {
       const format = file.originalname.split('.')[file.originalname.split('.').length - 1];
       cb(null, `${file.fieldname}-${Date.now()}.${format}`);
     }
-  })
+  }),
+  fileFilter(req, { mimetype }, callback) {
+    callback(null, mimetype === 'image/png')
+  }
 }

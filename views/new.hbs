@@ -2,13 +2,13 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
-    <title>App</title>
+    <title>Projets Abandonnés - Création</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link href="/css/tailwind.css" rel="stylesheet"/>
+    <link href="/css/tailwind.min.css" rel="stylesheet"/>
     <link href="/css/style.css" rel="stylesheet"/>
 </head>
-<body class="bg-gray-900">
+<body class="bg-gray-900 overflow-x-hidden">
     <img class="fixed select-none top-0 -z-1" src="/img/waves.svg" alt=""/>
     <form action="/project/create" method="POST" enctype='multipart/form-data'>
         <div class="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12 px-4">
@@ -30,34 +30,22 @@
                     name="totalHours"
                     placeholder="Nombre d'heures passées sur le projet">
                 </input>
-                <div class="relative mt-4">
-                    <input type="radio" name="color" value="red" checked>
-                    <label for="color">
-                        <span>
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
-                        </span>
-                    </label>
-                    <input type="radio" name="color" value="orange">
-                    <label for="color">
-                        <span>
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
-                        </span>
-                    </label>
-                </div>
             </div>
             <div>
                 <div class="mt-10 bg-gray-800 p-10 rounded-xl text-white shadow-2xl">
                     <h1 class="font-black text-xl text-center">Créer un nouveau projet abandonné</h1>
                     <div class="bg-gray-700 mt-4 border-gray-700 bg-opacity-20 rounded-md border-2 p-5">
                         <div class="font-bold text-xl text-center">Icone du projet</div>
-                        <img width="74px" class="cursor-pointer mx-auto mt-4" src="/img/unknown.svg" />
-                        <input type="file" name="logo" id="logo" />
+                        <img width="74px" id="icon_project" class="cursor-pointer rounded-md mx-auto mt-4" src="/img/unknown.svg" />
+                        <input type="file" accept="image/png" name="logo" id="logo" />
                     </div>
                     <div class="bg-gray-700 mt-4 border-gray-700 bg-opacity-20 rounded-md border-2 p-5">
                         <div class="font-bold text-xl text-center">Contributeurs</div>
                         <div class="flex flex-wrap">
-                            <img width="44px" class="mt-5 mr-2 rounded-full" src="/img/unknown.svg" />
-                            <input type="file" name="contributors" id="contributors" hidden multiple />
+                            <div id="contributors_logo" class="flex">
+                                <img width="44px" class="mt-5 mr-2 rounded-full" src="/img/unknown.svg" />
+                            </div>
+                            <input type="file" accept="image/png" name="contributors" id="contributors" hidden multiple />
                             <label for="contributors" class="mt-5 cursor-pointer rounded-full w-11 border-dashed border-2 border-gray-50 flex justify-center items-center">+</label>
                         </div>
                     </div>
@@ -75,5 +63,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js"></script>
     <script src="/js/app.js"></script>
+    <script>
+        document.getElementById('logo').onchange = function() {
+            document.getElementById('icon_project').src = window.URL.createObjectURL(this.files[0])
+        }
+        document.getElementById('contributors').onchange = function() {
+            const element = document.getElementById('contributors_logo')
+            element.innerHTML = ''
+            for(const logo of this.files) {
+                console.log(logo)
+                element.innerHTML += `<img width="44px" class="mt-5 mr-2 rounded-full" src="${window.URL.createObjectURL(logo)}" />`
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 module.exports = {
-  purge: [],
+  purge: ['./views/*.hbs'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
