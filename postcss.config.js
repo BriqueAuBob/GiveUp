@@ -8,10 +8,10 @@ module.exports = {
             ],
             defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
             safelist: [
-                'bg-red-500', 'bg-red-700',
-                'bg-green-500', 'bg-green-700',
-                'bg-blue-500', 'bg-blue-700',
-                'bg-yellow-500', 'bg-yellow-700',
+                'from-red-500', 'to-red-700',
+                'from-green-500', 'to-green-700',
+                'from-blue-500', 'to-blue-700',
+                'from-yellow-500', 'to-yellow-700',
             ]
         })
     ]
