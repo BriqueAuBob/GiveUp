@@ -11,15 +11,15 @@
     <body class="bg-gray-900 overflow-x-hidden">
         <img class="fixed select-none top-0 -z-1" src="/img/waves.svg" alt=""/>
         <section class="text-center animation-rocket">
-            <h1 id="head-text" class="font-black py-4 mt-24 text-8xl text-white flex flex-col">
+            <h1 id="head-text" class="font-black py-4 mt-24 text-4xl md:text-8xl text-white flex flex-col">
                 <span>Les meilleurs</span>
-                <span class="mt-10 z-10">abandons...</span>
-                <div id="rocket" class="w-screen flex justify-center">
+                <span class="mt-4 md:mt-10 z-10">abandons...</span>
+                <div id="rocket" class="w-screen hidden md:flex justify-center">
                     <img class="absolute transform -translate-y-56 z-0" src="/img/rocket.svg" alt=""/>
                 </div>
             </h1>
         </section>
-        <section id="projects" class="container px-4 mx-auto mt-64">
+        <section id="projects" class="container px-4 mx-auto mt-16 md:mt-64">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                 {{#each projects}}
                     <div class="bg-gradient-to-br from-{{this.color}}-500 to-{{this.color}}-700 p-8 rounded-md flex flex-col justify-between shadow-xl">
